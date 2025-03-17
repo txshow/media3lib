@@ -199,8 +199,8 @@ function buildFfmpeg() {
       --extra-ldflags="$DEP_LD_FLAGS" \
       --pkg-config="$(which pkg-config)" \
       --target-os=android \
-      --enable-static \
       --disable-shared \
+      --enable-static \
       --disable-doc \
       --disable-programs \
       --disable-everything \
@@ -214,7 +214,7 @@ function buildFfmpeg() {
       --enable-demuxers \
       --enable-swresample \
       --enable-avformat \
-      --enable-libvpx \
+      --disable-libvpx \
       --enable-protocol=file,http,https,mmsh,mmst,pipe,rtmp,rtmps,rtmpt,rtmpts,rtp,tls \
       --enable-version3 \
       --enable-mbedtls \
@@ -229,7 +229,7 @@ function buildFfmpeg() {
     make -j$JOBS
     make install
 
-    OUTPUT_LIB=${OUTPUT_DIR}/lib/${ABI}
+    OUTPUT_LIB=${OUTPUT_DIR}/${ABI}/lib
     mkdir -p "${OUTPUT_LIB}"
     cp "${BUILD_DIR}"/"${ABI}"/lib/*.a "${OUTPUT_LIB}"
 
